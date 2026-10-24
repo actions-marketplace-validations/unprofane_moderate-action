@@ -37,7 +37,7 @@ jobs:
 | `review` | add the label | `on-review`: the same choices |
 | `allow` | nothing | |
 
-`hide` minimizes a comment as abuse, the way a maintainer would from the comment's menu, so anyone with write access can show it again. An issue, pull request or discussion body cannot be hidden, so it is labelled. Owners, members and collaborators are not checked, nor are bots (`exempt-associations`, `exempt-bots`). Quoted replies, HTML comments from issue templates and code are left out of the text (`check-code: true` reads code too).
+`hide` minimizes a comment as abuse, the way a maintainer would from the comment's menu, so anyone with write access can show it again. An issue, pull request or discussion body cannot be hidden, so it is labeled. Owners, members and collaborators are not checked, nor are bots (`exempt-associations`, `exempt-bots`). Quoted replies, HTML comments from issue templates and code are left out of the text (`check-code: true` reads code too).
 
 ## Inputs
 
