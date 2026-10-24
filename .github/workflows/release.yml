@@ -1,0 +1,43 @@
+# Test every push; when package.json names a version with no release yet,
+# tag it (v1.2.3), release it, and move the major tag (v1) to it, so
+# `uses: unprofane/moderate-action@v1` picks it up. The runner loads
+# dist/index.js as committed; `npm run build` makes it from src/.
+# This repository is synced from the Unprofane monorepo; change the code there.
+name: release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm install --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm test
+      # The committed bundle loads, and refuses a run with no key.
+      - run: node dist/index.js | tee bundle.txt; grep -q 'api-key is empty' bundle.txt
+      - run: |
+          v="v$(node -p "require('./package.json').version")"
+          major="${v%%.*}"
+          if gh release view "$v" > /dev/null 2>&1; then exit 0; fi
+          gh release create "$v" --target "$GITHUB_SHA" --title "$v" --generate-notes
+          git tag -f "$major" "$GITHUB_SHA"
+          git push -f origin "refs/tags/$major"
+        env:
+          GH_TOKEN: ${{ github.token }}

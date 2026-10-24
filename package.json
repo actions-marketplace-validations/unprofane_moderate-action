@@ -1,0 +1,27 @@
+{
+  "name": "@unprofane/moderate-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A GitHub Action that hides abusive issue, pull request and discussion comments with the Unprofane profanity and toxicity API.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unprofane/moderate-action.git"
+  },
+  "homepage": "https://unprofane.com/docs/",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node24 --format=esm --outfile=dist/index.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@unprofane/sdk": "0.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.11"
+  }
+}

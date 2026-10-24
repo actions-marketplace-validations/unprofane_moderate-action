@@ -1,0 +1,56 @@
+name: Unprofane Comment Moderation
+description: Hide abusive issue, pull request and discussion comments, and label what needs a look, with the Unprofane profanity and toxicity API.
+author: Unprofane
+branding:
+  icon: shield
+  color: blue
+
+inputs:
+  api-key:
+    description: Your Unprofane API key (up_live_… or up_test_…), from a repository or organization secret.
+    required: true
+  github-token:
+    description: The token that hides comments, adds labels and replies. Needs issues, pull-requests and discussions write.
+    default: ${{ github.token }}
+  policy:
+    description: kids, teen, standard, strict or casual.
+    default: standard
+  context:
+    description: The context the API reads the text in (comment, chat, general, …).
+    default: comment
+  language:
+    description: A language code, or auto.
+    default: auto
+  on-block:
+    description: What to do when the API blocks a text, any of hide, label, reply, fail, comma-separated. hide applies to comments only.
+    default: hide,label
+  on-review:
+    description: What to do when the API says a person should look, the same choices as on-block.
+    default: label
+  label:
+    description: The label added by the label step. Created when missing.
+    default: needs-moderation
+  reply:
+    description: The reply the reply step posts.
+    default: A comment here was hidden by an automated check for abuse. A maintainer can show it again.
+  exempt-associations:
+    description: Authors whose texts are not checked, by their association with the repository, comma-separated. Empty checks everyone.
+    default: OWNER,MEMBER,COLLABORATOR
+  exempt-bots:
+    description: Skip texts written by bots.
+    default: 'true'
+  check-code:
+    description: Check code blocks and inline code too. Off by default, so pasted logs and identifiers are not read as speech.
+    default: 'false'
+
+outputs:
+  action:
+    description: allow, review or block, the strictest answer across the texts checked (allow when nothing was checked).
+  categories:
+    description: The categories that decided a review or block, comma-separated.
+  check-ids:
+    description: The Unprofane check ids, comma-separated, for feedback on a wrong answer.
+
+runs:
+  using: node24
+  main: dist/index.js
