@@ -1,5 +1,5 @@
 name: Unprofane Comment Moderation
-description: Hide abusive issue, pull request and discussion comments, and label what needs a look, with the Unprofane profanity and toxicity API.
+description: Hide abusive issue, pull request and discussion comments, and label what needs a look, with the Unprofane API.
 author: Unprofane
 branding:
   icon: shield
