@@ -60,7 +60,7 @@ Outputs: `action` (`allow`, `review` or `block`), `categories` (what decided it,
 
 ## The key and the text
 
-Make a key at [unprofane.com](https://unprofane.com/app/) and save it as the `UNPROFANE_API_KEY` secret. A test key (`up_test_…`) works without a plan, capped per day; a live key needs a plan, from $9 a month for 25,000 checks ([pricing](https://unprofane.com/pricing/)). Each text sent is one check.
+Make a key at [unprofane.com](https://unprofane.com/app/) and save it as the `UNPROFANE_API_KEY` secret. A test key (`up_test_…`) works without a plan, 100 free checks a month; a live key needs a plan, from $9 a month for 25,000 checks ([pricing](https://unprofane.com/pricing/)). Each text sent is one check.
 
 The action logs the verdict, the categories and the check ids, never the text. Texts the model reads are kept for 90 days to improve the engine, with no account, key or address beside them ([privacy](https://unprofane.com/legal/privacy/)).
 
